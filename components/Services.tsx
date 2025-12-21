@@ -57,7 +57,7 @@ const services = [
     href: "/joints-enduits",
     description:
       "Application d'enduits traditionnels ou modernes et rejointoiement de murs en pierre ou briques. Nos techniques artisanales assurent une finition parfaite et une protection optimale de vos murs. Nous maîtrisons les enduits à la chaux, ciment et les finitions décoratives.",
-    image: "/images/Maçons avec truelles sur chantier.jpg",
+    image: "/images/macons-truelles-chantier.jpg",
     features: ["Enduit traditionnel", "Enduit monocouche", "Rejointoiement", "Finitions décoratives"],
   },
 ];

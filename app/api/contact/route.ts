@@ -39,15 +39,28 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create email transporter
-    // For production, use environment variables for credentials
+    // Create email transporter with explicit SMTP settings for Railway
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true, // use SSL
       auth: {
-        user: process.env.EMAIL_USER || "maxime.marsal18@gmail.com",
-        pass: process.env.EMAIL_PASS, // App password from Gmail
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
+      connectionTimeout: 10000, // 10 seconds
+      greetingTimeout: 10000,
+      socketTimeout: 10000,
     });
+    
+    // Verify connection before sending
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.error("EMAIL_USER ou EMAIL_PASS non configuré");
+      return NextResponse.json(
+        { error: "Configuration email manquante" },
+        { status: 500 }
+      );
+    }
 
     // Determine department from postal code
     const department = codePostal.substring(0, 2);
@@ -61,8 +74,8 @@ export async function POST(request: NextRequest) {
 
     // Email content
     const mailOptions = {
-      from: process.env.EMAIL_USER || "maxime.marsal18@gmail.com",
-      to: "maxime.marsal18@gmail.com",
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_TO || process.env.EMAIL_USER,
       subject: `Nouveau Lead Maconnerie - ${codePostal} (${departmentName})`,
       html: `
         <!DOCTYPE html>

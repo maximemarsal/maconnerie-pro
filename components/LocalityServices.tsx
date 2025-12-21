@@ -41,7 +41,7 @@ const services = [
   },
   {
     title: "Joints et Enduits",
-    image: "/images/Maçons avec truelles sur chantier.jpg",
+    image: "/images/macons-truelles-chantier.jpg",
     features: ["Enduit traditionnel", "Enduit monocouche", "Rejointoiement", "Finitions"],
   },
 ];

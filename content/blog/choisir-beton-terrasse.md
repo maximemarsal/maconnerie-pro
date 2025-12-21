@@ -4,7 +4,7 @@ slug: "choisir-beton-terrasse"
 date: "2024-12-10"
 category: "Conseils"
 tags: ["béton", "terrasse", "extérieur", "matériaux"]
-cover: "/images/Prix Terrasse Béton.jpg"
+cover: "/images/prix-terrasse-beton.jpg"
 excerpt: "Béton décoratif, désactivé, imprimé ou lissé ? Découvrez les différentes options de béton pour votre terrasse et faites le bon choix selon vos besoins."
 author: "Équipe Maçonnerie Pro"
 published: true
