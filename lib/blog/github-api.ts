@@ -57,7 +57,7 @@ function generateFileContent(
     });
   }
   
-  return generateMarkdownContent(frontmatter, content);
+  return generateMarkdownContent(frontmatter as Record<string, unknown>, content);
 }
 
 /**
