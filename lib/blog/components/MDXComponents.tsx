@@ -245,7 +245,7 @@ export const mdxComponents = {
   // Override des éléments HTML par défaut si nécessaire
   img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
     <BlogImage
-      src={props.src || ""}
+      src={typeof props.src === "string" ? props.src : ""}
       alt={props.alt || ""}
     />
   ),
