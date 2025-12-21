@@ -22,12 +22,12 @@ export const metadata: Metadata = {
     title: "Rénovation Façades | Maçonnerie Pro",
     description:
       "Ravalement et rénovation de façades : nettoyage, enduit, peinture. Artisan certifié RGE.",
-    url: "https://maconnerie-pro.fr/renovation-facades",
+    url: "https://maconneriepro.fr/renovation-facades",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/renovation-facades",
+    canonical: "https://maconneriepro.fr/renovation-facades",
   },
 };
 

@@ -27,12 +27,12 @@ export const metadata: Metadata = {
     title: "Maçon dans les Bouches-du-Rhône 13 | Entreprise Maçonnerie Provence",
     description:
       "Entreprise de maçonnerie en Provence. Construction, rénovation. Devis gratuit.",
-    url: "https://maconnerie-pro.fr/macon-bouches-du-rhone-13",
+    url: "https://maconneriepro.fr/macon-bouches-du-rhone-13",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/macon-bouches-du-rhone-13",
+    canonical: "https://maconneriepro.fr/macon-bouches-du-rhone-13",
   },
 };
 

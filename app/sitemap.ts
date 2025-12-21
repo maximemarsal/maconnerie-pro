@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getAllArticles } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://maconnerie-pro.fr";
+  const baseUrl = "https://maconneriepro.fr";
   const currentDate = new Date();
 
   // Récupère tous les articles du blog

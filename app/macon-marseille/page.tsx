@@ -26,12 +26,12 @@ export const metadata: Metadata = {
     title: "Maçon à Marseille | Artisan Maçonnerie Bouches-du-Rhône 13",
     description:
       "Maçon professionnel à Marseille. Construction, rénovation, terrasses. Devis gratuit 24h.",
-    url: "https://maconnerie-pro.fr/macon-marseille",
+    url: "https://maconneriepro.fr/macon-marseille",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/macon-marseille",
+    canonical: "https://maconneriepro.fr/macon-marseille",
   },
 };
 

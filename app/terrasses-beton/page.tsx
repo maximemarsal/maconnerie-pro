@@ -22,12 +22,12 @@ export const metadata: Metadata = {
     title: "Terrasses Béton | Maçonnerie Pro",
     description:
       "Terrasses en béton classique, décoratif ou imprimé. Artisan maçon certifié, garantie décennale.",
-    url: "https://maconnerie-pro.fr/terrasses-beton",
+    url: "https://maconneriepro.fr/terrasses-beton",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/terrasses-beton",
+    canonical: "https://maconneriepro.fr/terrasses-beton",
   },
 };
 

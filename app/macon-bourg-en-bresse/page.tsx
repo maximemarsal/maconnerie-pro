@@ -26,12 +26,12 @@ export const metadata: Metadata = {
     title: "Maçon à Bourg-en-Bresse | Artisan Maçonnerie Ain 01",
     description:
       "Maçon professionnel à Bourg-en-Bresse. Construction, rénovation, terrasses. Devis gratuit 24h.",
-    url: "https://maconnerie-pro.fr/macon-bourg-en-bresse",
+    url: "https://maconneriepro.fr/macon-bourg-en-bresse",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/macon-bourg-en-bresse",
+    canonical: "https://maconneriepro.fr/macon-bourg-en-bresse",
   },
 };
 

@@ -27,12 +27,12 @@ export const metadata: Metadata = {
     title: "Maçon dans l'Ain 01 | Entreprise Maçonnerie",
     description:
       "Entreprise de maçonnerie dans l'Ain. Construction, rénovation. Devis gratuit.",
-    url: "https://maconnerie-pro.fr/macon-ain-01",
+    url: "https://maconneriepro.fr/macon-ain-01",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/macon-ain-01",
+    canonical: "https://maconneriepro.fr/macon-ain-01",
   },
 };
 

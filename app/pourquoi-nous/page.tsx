@@ -21,12 +21,12 @@ export const metadata: Metadata = {
     title: "Pourquoi Nous Choisir | Maçonnerie Pro",
     description:
       "20 ans d'expérience, certification RGE, garantie décennale. Découvrez nos engagements.",
-    url: "https://maconnerie-pro.fr/pourquoi-nous",
+    url: "https://maconneriepro.fr/pourquoi-nous",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/pourquoi-nous",
+    canonical: "https://maconneriepro.fr/pourquoi-nous",
   },
 };
 

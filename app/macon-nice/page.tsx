@@ -26,12 +26,12 @@ export const metadata: Metadata = {
     title: "Maçon à Nice | Artisan Maçonnerie Alpes-Maritimes 06",
     description:
       "Maçon professionnel à Nice et Côte d'Azur. Construction, rénovation. Devis gratuit 24h.",
-    url: "https://maconnerie-pro.fr/macon-nice",
+    url: "https://maconneriepro.fr/macon-nice",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/macon-nice",
+    canonical: "https://maconneriepro.fr/macon-nice",
   },
 };
 

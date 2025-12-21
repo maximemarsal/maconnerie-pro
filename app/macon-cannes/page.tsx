@@ -26,12 +26,12 @@ export const metadata: Metadata = {
     title: "Maçon à Cannes | Artisan Maçonnerie Alpes-Maritimes 06",
     description:
       "Maçon professionnel à Cannes et Côte d'Azur. Construction, rénovation. Devis gratuit 24h.",
-    url: "https://maconnerie-pro.fr/macon-cannes",
+    url: "https://maconneriepro.fr/macon-cannes",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/macon-cannes",
+    canonical: "https://maconneriepro.fr/macon-cannes",
   },
 };
 

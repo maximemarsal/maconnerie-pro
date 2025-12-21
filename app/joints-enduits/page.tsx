@@ -22,12 +22,12 @@ export const metadata: Metadata = {
     title: "Joints et Enduits | Maçonnerie Pro",
     description:
       "Joints et enduits traditionnels : rejointoiement pierre, enduit chaux. Artisan maçon certifié.",
-    url: "https://maconnerie-pro.fr/joints-enduits",
+    url: "https://maconneriepro.fr/joints-enduits",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/joints-enduits",
+    canonical: "https://maconneriepro.fr/joints-enduits",
   },
 };
 

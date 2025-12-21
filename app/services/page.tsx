@@ -23,12 +23,12 @@ export const metadata: Metadata = {
     title: "Nos Services de Maçonnerie | Maçonnerie Pro",
     description:
       "Tous nos services de maçonnerie : construction, rénovation, terrasses, extensions. Devis gratuit.",
-    url: "https://maconnerie-pro.fr/services",
+    url: "https://maconneriepro.fr/services",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/services",
+    canonical: "https://maconneriepro.fr/services",
   },
 };
 

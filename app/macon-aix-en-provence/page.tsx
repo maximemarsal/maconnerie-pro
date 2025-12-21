@@ -26,12 +26,12 @@ export const metadata: Metadata = {
     title: "Maçon à Aix-en-Provence | Artisan Maçonnerie Bouches-du-Rhône 13",
     description:
       "Maçon professionnel à Aix-en-Provence. Construction, rénovation, terrasses. Devis gratuit 24h.",
-    url: "https://maconnerie-pro.fr/macon-aix-en-provence",
+    url: "https://maconneriepro.fr/macon-aix-en-provence",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/macon-aix-en-provence",
+    canonical: "https://maconneriepro.fr/macon-aix-en-provence",
   },
 };
 

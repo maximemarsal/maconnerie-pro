@@ -26,12 +26,12 @@ export const metadata: Metadata = {
     title: "Maçon à La Flèche | Artisan Maçonnerie Sarthe 72",
     description:
       "Maçon professionnel à La Flèche. Construction, rénovation, terrasses. Devis gratuit sous 24h.",
-    url: "https://maconnerie-pro.fr/macon-la-fleche",
+    url: "https://maconneriepro.fr/macon-la-fleche",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/macon-la-fleche",
+    canonical: "https://maconneriepro.fr/macon-la-fleche",
   },
 };
 

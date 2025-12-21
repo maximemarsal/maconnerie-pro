@@ -15,7 +15,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://maconnerie-pro.fr"),
+  metadataBase: new URL("https://maconneriepro.fr"),
   title: {
     default: "Maconnerie Professionnelle | Devis Gratuit 72, 01, 06, 13 | Artisan Macon Expert",
     template: "%s | Maconnerie Pro",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://maconnerie-pro.fr",
+    url: "https://maconneriepro.fr",
     siteName: "Maconnerie Pro",
     title: "Maconnerie Professionnelle | Artisan Macon Expert depuis 20 ans",
     description:
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     images: ["/images/Masonry Trade Image 1200x800.webp"],
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr",
+    canonical: "https://maconneriepro.fr",
   },
   verification: {
     google: "verification_token",
@@ -99,14 +99,14 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "@id": "https://maconnerie-pro.fr",
+  "@id": "https://maconneriepro.fr",
   name: "Maconnerie Pro",
   description:
     "Expert en maconnerie depuis plus de 20 ans. Construction de murs, terrasses beton, renovation de facade, extension maison. Artisans certifies RGE avec garantie decennale.",
-  url: "https://maconnerie-pro.fr",
+  url: "https://maconneriepro.fr",
   telephone: "+33600000000",
   email: "maxime.marsal18@gmail.com",
-  image: "https://maconnerie-pro.fr/images/Masonry Trade Image 1200x800.webp",
+  image: "https://maconneriepro.fr/images/Masonry Trade Image 1200x800.webp",
   priceRange: "$$",
   address: {
     "@type": "PostalAddress",

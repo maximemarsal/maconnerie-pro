@@ -20,12 +20,12 @@ export const metadata: Metadata = {
     title: "Contact | Maçonnerie Pro",
     description:
       "Demandez un devis gratuit pour vos travaux de maçonnerie. Réponse sous 24h.",
-    url: "https://maconnerie-pro.fr/contact",
+    url: "https://maconneriepro.fr/contact",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/contact",
+    canonical: "https://maconneriepro.fr/contact",
   },
 };
 

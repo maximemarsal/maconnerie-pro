@@ -21,12 +21,12 @@ export const metadata: Metadata = {
     title: "Zones d'Intervention | Maçonnerie Pro",
     description:
       "Artisan maçon intervenant en Sarthe, Ain, Alpes-Maritimes et Bouches-du-Rhône. Devis gratuit.",
-    url: "https://maconnerie-pro.fr/zones-intervention",
+    url: "https://maconneriepro.fr/zones-intervention",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/zones-intervention",
+    canonical: "https://maconneriepro.fr/zones-intervention",
   },
 };
 

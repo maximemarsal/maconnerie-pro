@@ -26,12 +26,12 @@ export const metadata: Metadata = {
     title: "Maçon à Oyonnax | Artisan Maçonnerie Ain 01",
     description:
       "Maçon professionnel à Oyonnax et Haut-Bugey. Construction, rénovation, terrasses. Devis gratuit sous 24h.",
-    url: "https://maconnerie-pro.fr/macon-oyonnax",
+    url: "https://maconneriepro.fr/macon-oyonnax",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/macon-oyonnax",
+    canonical: "https://maconneriepro.fr/macon-oyonnax",
   },
 };
 

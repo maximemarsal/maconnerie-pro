@@ -25,12 +25,12 @@ export const metadata: Metadata = {
     title: "Maçon à Sablé-sur-Sarthe | Artisan Maçonnerie Sarthe 72",
     description:
       "Maçon professionnel à Sablé-sur-Sarthe. Construction, rénovation, terrasses. Devis gratuit sous 24h.",
-    url: "https://maconnerie-pro.fr/macon-sable-sur-sarthe",
+    url: "https://maconneriepro.fr/macon-sable-sur-sarthe",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/macon-sable-sur-sarthe",
+    canonical: "https://maconneriepro.fr/macon-sable-sur-sarthe",
   },
 };
 

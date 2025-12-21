@@ -27,12 +27,12 @@ export const metadata: Metadata = {
     title: "Maçon dans les Alpes-Maritimes 06 | Entreprise Maçonnerie Côte d'Azur",
     description:
       "Entreprise de maçonnerie sur la Côte d'Azur. Construction, rénovation. Devis gratuit.",
-    url: "https://maconnerie-pro.fr/macon-alpes-maritimes-06",
+    url: "https://maconneriepro.fr/macon-alpes-maritimes-06",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/macon-alpes-maritimes-06",
+    canonical: "https://maconneriepro.fr/macon-alpes-maritimes-06",
   },
 };
 

@@ -27,12 +27,12 @@ export const metadata: Metadata = {
     title: "Maçon en Sarthe 72 | Entreprise Maçonnerie",
     description:
       "Entreprise de maçonnerie en Sarthe. Construction, rénovation. Devis gratuit.",
-    url: "https://maconnerie-pro.fr/macon-sarthe-72",
+    url: "https://maconneriepro.fr/macon-sarthe-72",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/macon-sarthe-72",
+    canonical: "https://maconneriepro.fr/macon-sarthe-72",
   },
 };
 

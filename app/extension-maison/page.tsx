@@ -22,12 +22,12 @@ export const metadata: Metadata = {
     title: "Extension Maison | Maçonnerie Pro",
     description:
       "Extension et agrandissement de maison. Artisan maçon certifié, garantie décennale.",
-    url: "https://maconnerie-pro.fr/extension-maison",
+    url: "https://maconneriepro.fr/extension-maison",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/extension-maison",
+    canonical: "https://maconneriepro.fr/extension-maison",
   },
 };
 

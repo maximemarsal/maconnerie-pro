@@ -23,12 +23,12 @@ export const metadata: Metadata = {
     title: "Construction de Murs | Maçonnerie Pro",
     description:
       "Construction de tous types de murs : porteurs, pierre, parpaings. Artisan maçon certifié, garantie décennale.",
-    url: "https://maconnerie-pro.fr/construction-murs",
+    url: "https://maconneriepro.fr/construction-murs",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/construction-murs",
+    canonical: "https://maconneriepro.fr/construction-murs",
   },
 };
 

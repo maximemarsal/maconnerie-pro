@@ -22,12 +22,12 @@ export const metadata: Metadata = {
     title: "Clôtures et Murets | Maçonnerie Pro",
     description:
       "Construction de clôtures et murets : murs, piliers, soutènement. Artisan maçon certifié.",
-    url: "https://maconnerie-pro.fr/clotures-murets",
+    url: "https://maconneriepro.fr/clotures-murets",
     type: "website",
     locale: "fr_FR",
   },
   alternates: {
-    canonical: "https://maconnerie-pro.fr/clotures-murets",
+    canonical: "https://maconneriepro.fr/clotures-murets",
   },
 };
 
