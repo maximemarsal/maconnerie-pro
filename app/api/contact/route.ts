@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 interface ContactFormData {
   email: string;
@@ -46,52 +46,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verify env vars before creating transporter
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-      console.error("[CONTACT API] EMAIL_USER ou EMAIL_PASS non configuré");
-      console.log("[CONTACT API] EMAIL_USER défini:", !!process.env.EMAIL_USER);
-      console.log("[CONTACT API] EMAIL_PASS défini:", !!process.env.EMAIL_PASS);
+    // Verify env var
+    if (!process.env.RESEND_API_KEY) {
+      console.error("[CONTACT API] RESEND_API_KEY non configuré");
       return NextResponse.json(
         { error: "Configuration email manquante sur le serveur" },
         { status: 500 }
       );
     }
     
-    console.log("[CONTACT API] Config email:", {
-      user: process.env.EMAIL_USER?.substring(0, 5) + "***",
-      passLength: process.env.EMAIL_PASS?.length
-    });
-
-    // Create email transporter - essayer port 587 (TLS) car 465 peut être bloqué
-    console.log("[CONTACT API] Création du transporter SMTP...");
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
-      secure: false, // TLS
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-      connectionTimeout: 30000, // 30 seconds
-      greetingTimeout: 30000,
-      socketTimeout: 30000,
-      tls: {
-        rejectUnauthorized: false
-      }
-    });
-    
-    // Verify SMTP connection
-    console.log("[CONTACT API] Vérification connexion SMTP...");
-    try {
-      await transporter.verify();
-      console.log("[CONTACT API] Connexion SMTP OK");
-    } catch (verifyError) {
-      console.error("[CONTACT API] Échec vérification SMTP:", verifyError);
-      return NextResponse.json(
-        { error: "Impossible de se connecter au serveur email", details: String(verifyError) },
-        { status: 500 }
-      );
-    }
+    console.log("[CONTACT API] Initialisation Resend...");
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     // Determine department from postal code
     const department = codePostal.substring(0, 2);
@@ -104,9 +69,13 @@ export async function POST(request: NextRequest) {
     const departmentName = departmentNames[department] || `Departement ${department}`;
 
     // Email content
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_TO || process.env.EMAIL_USER,
+    const emailTo = process.env.EMAIL_TO || "maxime.marsal18@gmail.com";
+    
+    console.log("[CONTACT API] Envoi email à:", emailTo);
+    
+    const { data, error } = await resend.emails.send({
+      from: "Maconnerie Pro <onboarding@resend.dev>",
+      to: [emailTo],
       subject: `Nouveau Lead Maconnerie - ${codePostal} (${departmentName})`,
       html: `
         <!DOCTYPE html>
@@ -155,38 +124,28 @@ export async function POST(request: NextRequest) {
         </body>
         </html>
       `,
-      text: `
-        Nouvelle Demande de Devis - Maconnerie Pro
-        
-        Email : ${email}
-        Telephone : ${telephone}
-        Code Postal : ${codePostal} - ${departmentName}
-        
-        Description du Projet :
-        ${description}
-        
-        ---
-        Date de reception : ${new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" })}
-      `,
-    };
+    });
 
-    // Send email
-    console.log("[CONTACT API] Envoi de l'email...");
-    const result = await transporter.sendMail(mailOptions);
-    console.log("[CONTACT API] Email envoyé avec succès:", result.messageId);
+    if (error) {
+      console.error("[CONTACT API] Erreur Resend:", error);
+      return NextResponse.json(
+        { error: "Erreur lors de l'envoi de l'email", details: error.message },
+        { status: 500 }
+      );
+    }
+
+    console.log("[CONTACT API] Email envoyé avec succès:", data?.id);
 
     return NextResponse.json(
-      { message: "Email envoye avec succes", messageId: result.messageId },
+      { message: "Email envoye avec succes", id: data?.id },
       { status: 200 }
     );
   } catch (error) {
     console.error("[CONTACT API] Erreur:", error);
-    const err = error as { code?: string; command?: string; message?: string };
+    const err = error as { message?: string };
     return NextResponse.json(
       { 
         error: "Erreur lors de l'envoi de l'email",
-        code: err.code,
-        command: err.command,
         message: err.message
       },
       { status: 500 }
