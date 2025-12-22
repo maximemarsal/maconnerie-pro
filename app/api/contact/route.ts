@@ -49,17 +49,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Create email transporter with Railway SMTP settings
-    const smtpPort = parseInt(process.env.SMTP_PORT || "465");
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || "smtp.gmail.com",
-      port: smtpPort,
-      secure: smtpPort === 465, // true for 465, false for 587
+      port: parseInt(process.env.SMTP_PORT || "587"),
+      secure: false, // use TLS
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
-      },
-      tls: {
-        rejectUnauthorized: false,
       },
     });
 
