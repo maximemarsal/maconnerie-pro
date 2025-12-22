@@ -21,7 +21,7 @@ const services = [
   },
   {
     title: "Terrasses en Béton",
-    image: "/images/prix-terrasse-beton.jpg",
+    image: "/images/Prix Terrasse Béton.jpg",
     features: ["Béton décoratif", "Dalle lisse", "Béton imprimé", "Béton désactivé"],
   },
   {

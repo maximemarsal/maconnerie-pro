@@ -21,7 +21,7 @@ const services = [
     href: "/terrasses-beton",
     description:
       "Conception et réalisation de terrasses en béton décoratif, dalle béton lisse ou imprimé. Nous créons des espaces extérieurs durables et esthétiques qui valorisent votre propriété. Nos techniques modernes garantissent une finition impeccable et une résistance optimale aux intempéries.",
-    image: "/images/prix-terrasse-beton.jpg",
+    image: "/images/Prix Terrasse Béton.jpg",
     features: ["Béton décoratif", "Dalle lisse", "Béton imprimé", "Béton désactivé"],
   },
   {
