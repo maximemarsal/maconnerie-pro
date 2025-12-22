@@ -9,12 +9,17 @@ interface ContactFormData {
 }
 
 export async function POST(request: NextRequest) {
+  console.log("[CONTACT API] Requête reçue");
+  
   try {
     const body: ContactFormData = await request.json();
     const { email, telephone, codePostal, description } = body;
+    
+    console.log("[CONTACT API] Données reçues:", { email, telephone, codePostal, descLength: description?.length });
 
     // Validate required fields
     if (!email || !telephone || !codePostal || !description) {
+      console.log("[CONTACT API] Champs manquants");
       return NextResponse.json(
         { error: "Tous les champs sont requis" },
         { status: 400 }
@@ -24,6 +29,7 @@ export async function POST(request: NextRequest) {
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
+      console.log("[CONTACT API] Email invalide:", email);
       return NextResponse.json(
         { error: "Format d'email invalide" },
         { status: 400 }
@@ -33,31 +39,56 @@ export async function POST(request: NextRequest) {
     // Validate postal code (French format)
     const postalRegex = /^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/;
     if (!postalRegex.test(codePostal)) {
+      console.log("[CONTACT API] Code postal invalide:", codePostal);
       return NextResponse.json(
         { error: "Code postal invalide" },
         { status: 400 }
       );
     }
 
-    // Create email transporter with explicit SMTP settings for Railway
+    // Verify env vars before creating transporter
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.error("[CONTACT API] EMAIL_USER ou EMAIL_PASS non configuré");
+      console.log("[CONTACT API] EMAIL_USER défini:", !!process.env.EMAIL_USER);
+      console.log("[CONTACT API] EMAIL_PASS défini:", !!process.env.EMAIL_PASS);
+      return NextResponse.json(
+        { error: "Configuration email manquante sur le serveur" },
+        { status: 500 }
+      );
+    }
+    
+    console.log("[CONTACT API] Config email:", {
+      user: process.env.EMAIL_USER?.substring(0, 5) + "***",
+      passLength: process.env.EMAIL_PASS?.length
+    });
+
+    // Create email transporter - essayer port 587 (TLS) car 465 peut être bloqué
+    console.log("[CONTACT API] Création du transporter SMTP...");
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
-      port: 465,
-      secure: true, // use SSL
+      port: 587,
+      secure: false, // TLS
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
-      connectionTimeout: 10000, // 10 seconds
-      greetingTimeout: 10000,
-      socketTimeout: 10000,
+      connectionTimeout: 30000, // 30 seconds
+      greetingTimeout: 30000,
+      socketTimeout: 30000,
+      tls: {
+        rejectUnauthorized: false
+      }
     });
     
-    // Verify connection before sending
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-      console.error("EMAIL_USER ou EMAIL_PASS non configuré");
+    // Verify SMTP connection
+    console.log("[CONTACT API] Vérification connexion SMTP...");
+    try {
+      await transporter.verify();
+      console.log("[CONTACT API] Connexion SMTP OK");
+    } catch (verifyError) {
+      console.error("[CONTACT API] Échec vérification SMTP:", verifyError);
       return NextResponse.json(
-        { error: "Configuration email manquante" },
+        { error: "Impossible de se connecter au serveur email", details: String(verifyError) },
         { status: 500 }
       );
     }
@@ -140,16 +171,24 @@ export async function POST(request: NextRequest) {
     };
 
     // Send email
-    await transporter.sendMail(mailOptions);
+    console.log("[CONTACT API] Envoi de l'email...");
+    const result = await transporter.sendMail(mailOptions);
+    console.log("[CONTACT API] Email envoyé avec succès:", result.messageId);
 
     return NextResponse.json(
-      { message: "Email envoye avec succes" },
+      { message: "Email envoye avec succes", messageId: result.messageId },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Erreur lors de l'envoi de l'email:", error);
+    console.error("[CONTACT API] Erreur:", error);
+    const err = error as { code?: string; command?: string; message?: string };
     return NextResponse.json(
-      { error: "Erreur lors de l'envoi de l'email" },
+      { 
+        error: "Erreur lors de l'envoi de l'email",
+        code: err.code,
+        command: err.command,
+        message: err.message
+      },
       { status: 500 }
     );
   }
