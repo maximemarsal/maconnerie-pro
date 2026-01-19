@@ -37,7 +37,19 @@ async function sendToSolutravo(data: {
   }
 
   try {
-    console.log("[SOLUTRAVO] Envoi du lead...");
+    const payload = {
+      activity_id: parseInt(activityId),
+      name: data.name,
+      first_name: data.first_name,
+      tel: data.tel,
+      email: data.email,
+      address: data.town, // On utilise la ville comme adresse (champ requis par Solutravo)
+      postal_code: data.postal_code,
+      town: data.town,
+      project: data.project,
+    };
+    
+    console.log("[SOLUTRAVO] Envoi du lead avec payload:", JSON.stringify(payload, null, 2));
     
     const response = await fetch("https://integration-api.solutravo-app.fr/api/quotations/store", {
       method: "POST",
@@ -47,24 +59,15 @@ async function sendToSolutravo(data: {
         "Authorization": `Bearer ${token}`,
         "User-Agent": "MaconneriePro/1.0",
       },
-      body: JSON.stringify({
-        activity_id: parseInt(activityId),
-        name: data.name,
-        first_name: data.first_name,
-        tel: data.tel,
-        email: data.email,
-        address: data.town, // On utilise la ville comme adresse (champ requis par Solutravo)
-        postal_code: data.postal_code,
-        town: data.town,
-        project: data.project,
-        customer_type: 1, // Particulier
-      }),
+      body: JSON.stringify(payload),
     });
 
     const result: SolutravoResponse = await response.json();
     
+    console.log("[SOLUTRAVO] Réponse complète:", JSON.stringify(result, null, 2));
+    
     if (result.error) {
-      console.error("[SOLUTRAVO] Erreur:", result.errors);
+      console.error("[SOLUTRAVO] Erreur détaillée:", JSON.stringify(result.errors, null, 2));
       return { success: false, error: JSON.stringify(result.errors) };
     }
 
