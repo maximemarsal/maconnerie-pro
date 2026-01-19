@@ -14,7 +14,8 @@ interface LocalityContactProps {
 }
 
 interface FormData {
-  nomPrenom: string;
+  nom: string;
+  prenom: string;
   email: string;
   telephone: string;
   ville: string;
@@ -23,7 +24,8 @@ interface FormData {
 }
 
 interface FormErrors {
-  nomPrenom?: string;
+  nom?: string;
+  prenom?: string;
   email?: string;
   telephone?: string;
   ville?: string;
@@ -43,7 +45,8 @@ export default function LocalityContact({
   const isHeaderInView = useInView(headerRef, { once: true });
   
   const [formData, setFormData] = useState<FormData>({
-    nomPrenom: "",
+    nom: "",
+    prenom: "",
     email: "",
     telephone: "",
     ville: "",
@@ -58,10 +61,16 @@ export default function LocalityContact({
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
     
-    if (!formData.nomPrenom) {
-      newErrors.nomPrenom = "Le nom et prénom sont requis";
-    } else if (formData.nomPrenom.length < 2) {
-      newErrors.nomPrenom = "Minimum 2 caractères";
+    if (!formData.nom) {
+      newErrors.nom = "Le nom est requis";
+    } else if (formData.nom.length < 2) {
+      newErrors.nom = "Minimum 2 caractères";
+    }
+    
+    if (!formData.prenom) {
+      newErrors.prenom = "Le prénom est requis";
+    } else if (formData.prenom.length < 2) {
+      newErrors.prenom = "Minimum 2 caractères";
     }
     
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -125,7 +134,7 @@ export default function LocalityContact({
       
       if (response.ok) {
         setSubmitStatus("success");
-        setFormData({ nomPrenom: "", email: "", telephone: "", ville: "", codePostal: "", description: "" });
+        setFormData({ nom: "", prenom: "", email: "", telephone: "", ville: "", codePostal: "", description: "" });
       } else {
         setSubmitStatus("error");
       }
@@ -170,20 +179,37 @@ export default function LocalityContact({
             className="bg-white rounded-2xl p-8 shadow-xl border border-border"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="nomPrenom" className="block text-sm font-semibold text-foreground mb-2">
-                  Nom et Prénom
-                </label>
-                <input
-                  type="text"
-                  id="nomPrenom"
-                  name="nomPrenom"
-                  value={formData.nomPrenom}
-                  onChange={handleChange}
-                  placeholder="Jean Dupont"
-                  className={`w-full px-4 py-3 rounded-lg border ${errors.nomPrenom ? "border-red-500" : "border-border"} bg-background focus:border-primary transition-colors text-foreground`}
-                />
-                {errors.nomPrenom && <p className="mt-1 text-sm text-red-500">{errors.nomPrenom}</p>}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="prenom" className="block text-sm font-semibold text-foreground mb-2">
+                    Prénom
+                  </label>
+                  <input
+                    type="text"
+                    id="prenom"
+                    name="prenom"
+                    value={formData.prenom}
+                    onChange={handleChange}
+                    placeholder="Jean"
+                    className={`w-full px-4 py-3 rounded-lg border ${errors.prenom ? "border-red-500" : "border-border"} bg-background focus:border-primary transition-colors text-foreground`}
+                  />
+                  {errors.prenom && <p className="mt-1 text-sm text-red-500">{errors.prenom}</p>}
+                </div>
+                <div>
+                  <label htmlFor="nom" className="block text-sm font-semibold text-foreground mb-2">
+                    Nom
+                  </label>
+                  <input
+                    type="text"
+                    id="nom"
+                    name="nom"
+                    value={formData.nom}
+                    onChange={handleChange}
+                    placeholder="Dupont"
+                    className={`w-full px-4 py-3 rounded-lg border ${errors.nom ? "border-red-500" : "border-border"} bg-background focus:border-primary transition-colors text-foreground`}
+                  />
+                  {errors.nom && <p className="mt-1 text-sm text-red-500">{errors.nom}</p>}
+                </div>
               </div>
 
               <div>

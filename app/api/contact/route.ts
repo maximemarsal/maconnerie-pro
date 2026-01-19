@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
 interface ContactFormData {
-  nomPrenom: string;
+  nom: string;
+  prenom: string;
   email: string;
   telephone: string;
   ville: string;
@@ -23,7 +24,6 @@ async function sendToSolutravo(data: {
   first_name: string;
   tel: string;
   email: string;
-  address: string;
   postal_code: string;
   town: string;
   project: string;
@@ -53,7 +53,7 @@ async function sendToSolutravo(data: {
         first_name: data.first_name,
         tel: data.tel,
         email: data.email,
-        address: data.address,
+        address: data.town, // On utilise la ville comme adresse (champ requis par Solutravo)
         postal_code: data.postal_code,
         town: data.town,
         project: data.project,
@@ -76,29 +76,17 @@ async function sendToSolutravo(data: {
   }
 }
 
-// Fonction pour séparer nom et prénom
-function splitNomPrenom(nomPrenom: string): { name: string; first_name: string } {
-  const parts = nomPrenom.trim().split(/\s+/);
-  if (parts.length === 1) {
-    return { name: parts[0], first_name: parts[0] };
-  }
-  // Premier mot = prénom, le reste = nom
-  const first_name = parts[0];
-  const name = parts.slice(1).join(" ");
-  return { name, first_name };
-}
-
 export async function POST(request: NextRequest) {
   console.log("[CONTACT API] Requête reçue");
   
   try {
     const body: ContactFormData = await request.json();
-    const { nomPrenom, email, telephone, ville, codePostal, description } = body;
+    const { nom, prenom, email, telephone, ville, codePostal, description } = body;
     
-    console.log("[CONTACT API] Données reçues:", { nomPrenom, email, telephone, ville, codePostal, descLength: description?.length });
+    console.log("[CONTACT API] Données reçues:", { nom, prenom, email, telephone, ville, codePostal, descLength: description?.length });
 
     // Validate required fields
-    if (!nomPrenom || !email || !telephone || !ville || !codePostal || !description) {
+    if (!nom || !prenom || !email || !telephone || !ville || !codePostal || !description) {
       console.log("[CONTACT API] Champs manquants");
       return NextResponse.json(
         { error: "Tous les champs sont requis" },
@@ -106,11 +94,20 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    // Validate nom/prenom
-    if (nomPrenom.length < 2) {
-      console.log("[CONTACT API] Nom/Prénom trop court:", nomPrenom);
+    // Validate nom
+    if (nom.length < 2) {
+      console.log("[CONTACT API] Nom trop court:", nom);
       return NextResponse.json(
-        { error: "Nom et prénom invalides" },
+        { error: "Nom invalide" },
+        { status: 400 }
+      );
+    }
+    
+    // Validate prenom
+    if (prenom.length < 2) {
+      console.log("[CONTACT API] Prénom trop court:", prenom);
+      return NextResponse.json(
+        { error: "Prénom invalide" },
         { status: 400 }
       );
     }
@@ -198,8 +195,12 @@ export async function POST(request: NextRequest) {
             </div>
             <div class="content">
               <div class="field">
-                <div class="label">Nom et Prénom :</div>
-                <div class="value">${nomPrenom}</div>
+                <div class="label">Prénom :</div>
+                <div class="value">${prenom}</div>
+              </div>
+              <div class="field">
+                <div class="label">Nom :</div>
+                <div class="value">${nom}</div>
               </div>
               <div class="field">
                 <div class="label">Email :</div>
@@ -242,14 +243,12 @@ export async function POST(request: NextRequest) {
 
     console.log("[CONTACT API] Email envoyé avec succès:", data?.id);
 
-    // Envoi à Solutravo en parallèle (ne bloque pas la réponse)
-    const { name, first_name } = splitNomPrenom(nomPrenom);
+    // Envoi à Solutravo
     const solutravoResult = await sendToSolutravo({
-      name,
-      first_name,
+      name: nom,
+      first_name: prenom,
       tel: telephone,
       email,
-      address: ville, // On utilise la ville comme adresse
       postal_code: codePostal,
       town: ville,
       project: description,
