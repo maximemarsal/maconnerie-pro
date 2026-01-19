@@ -47,6 +47,7 @@ async function sendToSolutravo(data: {
       postal_code: data.postal_code,
       town: data.town,
       project: data.project,
+      source: "MaconneriePro", // Source de la demande
     };
     
     console.log("[SOLUTRAVO] Envoi du lead avec payload:", JSON.stringify(payload, null, 2));
