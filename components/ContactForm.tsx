@@ -6,15 +6,19 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface FormData {
+  nomPrenom: string;
   email: string;
   telephone: string;
+  ville: string;
   codePostal: string;
   description: string;
 }
 
 interface FormErrors {
+  nomPrenom?: string;
   email?: string;
   telephone?: string;
+  ville?: string;
   codePostal?: string;
   description?: string;
 }
@@ -24,8 +28,10 @@ export default function ContactForm() {
   const isHeaderInView = useInView(headerRef, { once: true });
   
   const [formData, setFormData] = useState<FormData>({
+    nomPrenom: "",
     email: "",
     telephone: "",
+    ville: "",
     codePostal: "",
     description: "",
   });
@@ -36,6 +42,12 @@ export default function ContactForm() {
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
+    
+    if (!formData.nomPrenom) {
+      newErrors.nomPrenom = "Le nom et prénom sont requis";
+    } else if (formData.nomPrenom.length < 2) {
+      newErrors.nomPrenom = "Minimum 2 caractères";
+    }
     
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email) {
@@ -49,6 +61,12 @@ export default function ContactForm() {
       newErrors.telephone = "Le téléphone est requis";
     } else if (!phoneRegex.test(formData.telephone.replace(/\s/g, ""))) {
       newErrors.telephone = "Veuillez entrer un numéro valide";
+    }
+    
+    if (!formData.ville) {
+      newErrors.ville = "La ville est requise";
+    } else if (formData.ville.length < 2) {
+      newErrors.ville = "Minimum 2 caractères";
     }
     
     const postalRegex = /^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/;
@@ -95,7 +113,7 @@ export default function ContactForm() {
       
       if (response.ok) {
         setSubmitStatus("success");
-        setFormData({ email: "", telephone: "", codePostal: "", description: "" });
+        setFormData({ nomPrenom: "", email: "", telephone: "", ville: "", codePostal: "", description: "" });
       } else {
         setSubmitStatus("error");
       }
@@ -140,6 +158,27 @@ export default function ContactForm() {
             className="bg-white rounded-2xl p-8 md:p-10 shadow-xl border border-border"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Nom/Prénom */}
+              <div>
+                <label htmlFor="nomPrenom" className="block text-sm font-semibold text-foreground mb-2">
+                  Nom et Prénom
+                </label>
+                <input
+                  type="text"
+                  id="nomPrenom"
+                  name="nomPrenom"
+                  value={formData.nomPrenom}
+                  onChange={handleChange}
+                  placeholder="Jean Dupont"
+                  className={`w-full px-4 py-3 rounded-lg border ${
+                    errors.nomPrenom ? "border-red-500" : "border-border"
+                  } bg-background focus:border-primary transition-colors text-foreground placeholder:text-foreground-light/50`}
+                />
+                {errors.nomPrenom && (
+                  <p className="mt-1 text-sm text-red-500">{errors.nomPrenom}</p>
+                )}
+              </div>
+
               {/* Email */}
               <div>
                 <label htmlFor="email" className="block text-sm font-semibold text-foreground mb-2">
@@ -179,6 +218,27 @@ export default function ContactForm() {
                 />
                 {errors.telephone && (
                   <p className="mt-1 text-sm text-red-500">{errors.telephone}</p>
+                )}
+              </div>
+
+              {/* Ville */}
+              <div>
+                <label htmlFor="ville" className="block text-sm font-semibold text-foreground mb-2">
+                  Ville
+                </label>
+                <input
+                  type="text"
+                  id="ville"
+                  name="ville"
+                  value={formData.ville}
+                  onChange={handleChange}
+                  placeholder="Le Mans"
+                  className={`w-full px-4 py-3 rounded-lg border ${
+                    errors.ville ? "border-red-500" : "border-border"
+                  } bg-background focus:border-primary transition-colors text-foreground placeholder:text-foreground-light/50`}
+                />
+                {errors.ville && (
+                  <p className="mt-1 text-sm text-red-500">{errors.ville}</p>
                 )}
               </div>
 
