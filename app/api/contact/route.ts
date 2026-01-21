@@ -27,6 +27,7 @@ async function sendToSolutravo(data: {
   postal_code: string;
   town: string;
   project: string;
+  ip_address: string;
 }): Promise<{ success: boolean; quotation_id?: number; error?: string }> {
   const token = process.env.SOLUTRAVO_API_TOKEN;
   const activityId = process.env.SOLUTRAVO_ACTIVITY_ID;
@@ -47,7 +48,8 @@ async function sendToSolutravo(data: {
       postal_code: data.postal_code,
       town: data.town,
       project: data.project,
-      source: "MaconneriePro", // Source de la demande
+      source: "MaconneriePro",
+      ip_address: data.ip_address,
     };
     
     console.log("[SOLUTRAVO] Envoi du lead avec payload:", JSON.stringify(payload, null, 2));
@@ -83,11 +85,15 @@ async function sendToSolutravo(data: {
 export async function POST(request: NextRequest) {
   console.log("[CONTACT API] Requête reçue");
   
+  // Récupérer l'adresse IP du client
+  const forwarded = request.headers.get("x-forwarded-for");
+  const ipAddress = forwarded ? forwarded.split(",")[0].trim() : request.headers.get("x-real-ip") || "127.0.0.1";
+  
   try {
     const body: ContactFormData = await request.json();
     const { nom, prenom, email, telephone, ville, codePostal, description } = body;
     
-    console.log("[CONTACT API] Données reçues:", { nom, prenom, email, telephone, ville, codePostal, descLength: description?.length });
+    console.log("[CONTACT API] Données reçues:", { nom, prenom, email, telephone, ville, codePostal, descLength: description?.length, ip: ipAddress });
 
     // Validate required fields
     if (!nom || !prenom || !email || !telephone || !ville || !codePostal || !description) {
@@ -256,6 +262,7 @@ export async function POST(request: NextRequest) {
       postal_code: codePostal,
       town: ville,
       project: description,
+      ip_address: ipAddress,
     });
 
     return NextResponse.json(
