@@ -48,7 +48,7 @@ async function sendToSolutravo(data: {
       postal_code: data.postal_code,
       town: data.town,
       project: data.project,
-      source: "MaconneriePro",
+      source: "Maxime Marsal",
       ip_address: data.ip_address,
     };
     
