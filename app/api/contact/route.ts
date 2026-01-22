@@ -39,7 +39,7 @@ async function sendToSolutravo(data: {
 
   try {
     const payload = {
-      activity_id: parseInt(activityId),
+      activity_id: 18,
       name: data.name,
       first_name: data.first_name,
       tel: data.tel,

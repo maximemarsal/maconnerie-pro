@@ -21,7 +21,7 @@ const services = [
     href: "/terrasses-beton",
     description:
       "Conception et réalisation de terrasses en béton décoratif, dalle béton lisse ou imprimé. Nous créons des espaces extérieurs durables et esthétiques qui valorisent votre propriété. Nos techniques modernes garantissent une finition impeccable et une résistance optimale aux intempéries.",
-    image: "/images/Prix Terrasse Béton.jpg",
+    image: "/images/prix-terrasse-beton.jpg",
     features: ["Béton décoratif", "Dalle lisse", "Béton imprimé", "Béton désactivé"],
   },
   {
@@ -74,6 +74,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
       transition={{ duration: 0.5, delay: 0.1 }}
       className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
     >
+      <Link href={service.href} className="block">
       <div className="grid md:grid-cols-2 gap-0">
         {/* Image */}
         <div className={`relative h-64 md:h-full min-h-[300px] overflow-hidden ${index % 2 !== 0 ? "md:order-2" : ""}`}>
@@ -117,22 +118,22 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
               </li>
             ))}
           </ul>
-          <Link
-            href={service.href}
-            className="inline-flex items-center text-primary font-semibold hover:text-primary-dark transition-colors"
+          <span
+            className="inline-flex items-center text-primary font-semibold group-hover:text-primary-dark transition-colors"
           >
             En savoir plus
             <svg
-              className="ml-2 w-4 h-4"
+              className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </Link>
+          </span>
         </div>
       </div>
+      </Link>
     </motion.article>
   );
 }
