@@ -5,6 +5,13 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+// Déclaration pour TypeScript
+declare global {
+  interface Window {
+    gtag_report_conversion: (url?: string) => boolean;
+  }
+}
+
 interface FormData {
   nom: string;
   prenom: string;
@@ -123,6 +130,10 @@ export default function ContactForm() {
       if (response.ok) {
         setSubmitStatus("success");
         setFormData({ nom: "", prenom: "", email: "", telephone: "", ville: "", codePostal: "", description: "" });
+        // Google Ads Conversion Tracking
+        if (typeof window !== "undefined" && window.gtag_report_conversion) {
+          window.gtag_report_conversion();
+        }
       } else {
         setSubmitStatus("error");
       }

@@ -4,6 +4,13 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import Link from "next/link";
 
+// Déclaration pour TypeScript
+declare global {
+  interface Window {
+    gtag_report_conversion: (url?: string) => boolean;
+  }
+}
+
 interface LocalityContactProps {
   cityName: string;
   departmentName: string;
@@ -135,6 +142,10 @@ export default function LocalityContact({
       if (response.ok) {
         setSubmitStatus("success");
         setFormData({ nom: "", prenom: "", email: "", telephone: "", ville: "", codePostal: "", description: "" });
+        // Google Ads Conversion Tracking
+        if (typeof window !== "undefined" && window.gtag_report_conversion) {
+          window.gtag_report_conversion();
+        }
       } else {
         setSubmitStatus("error");
       }

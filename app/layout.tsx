@@ -187,6 +187,24 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-1HLVM83WG4');
+            gtag('config', 'AW-11500390605');
+          `}
+        </Script>
+        {/* Google Ads Conversion Tracking */}
+        <Script id="google-ads-conversion" strategy="afterInteractive">
+          {`
+            function gtag_report_conversion(url) {
+              var callback = function () {
+                if (typeof(url) != 'undefined') {
+                  window.location = url;
+                }
+              };
+              gtag('event', 'conversion', {
+                'send_to': 'AW-11500390605/6Ne9CLOMueobEM2R6Osq',
+                'event_callback': callback
+              });
+              return false;
+            }
           `}
         </Script>
         {children}
