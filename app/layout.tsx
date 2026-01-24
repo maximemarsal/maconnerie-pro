@@ -217,6 +217,19 @@ export default function RootLayout({
               });
               return false;
             }
+            
+            function gtagSendEvent(url) {
+              var callback = function () {
+                if (typeof url === 'string') {
+                  window.location = url;
+                }
+              };
+              gtag('event', 'ads_conversion_Page_view_Page_load_htt_1', {
+                'event_callback': callback,
+                'event_timeout': 2000
+              });
+              return false;
+            }
           `}
         </Script>
         {children}

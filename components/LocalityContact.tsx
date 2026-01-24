@@ -8,6 +8,7 @@ import Link from "next/link";
 declare global {
   interface Window {
     gtag_report_conversion: (url?: string) => boolean;
+    gtagSendEvent: (url?: string) => boolean;
   }
 }
 
@@ -143,8 +144,13 @@ export default function LocalityContact({
         setSubmitStatus("success");
         setFormData({ nom: "", prenom: "", email: "", telephone: "", ville: "", codePostal: "", description: "" });
         // Google Ads Conversion Tracking
-        if (typeof window !== "undefined" && window.gtag_report_conversion) {
-          window.gtag_report_conversion();
+        if (typeof window !== "undefined") {
+          if (window.gtag_report_conversion) {
+            window.gtag_report_conversion();
+          }
+          if (window.gtagSendEvent) {
+            window.gtagSendEvent();
+          }
         }
       } else {
         setSubmitStatus("error");
