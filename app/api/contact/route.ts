@@ -253,23 +253,23 @@ export async function POST(request: NextRequest) {
 
     console.log("[CONTACT API] Email envoyé avec succès:", data?.id);
 
-    // Envoi à Solutravo - TEMPORAIREMENT DÉSACTIVÉ POUR TEST
-    // const solutravoResult = await sendToSolutravo({
-    //   name: nom,
-    //   first_name: prenom,
-    //   tel: telephone,
-    //   email,
-    //   postal_code: codePostal,
-    //   town: ville,
-    //   project: description,
-    //   ip_address: ipAddress,
-    // });
+    // Envoi à Solutravo
+    const solutravoResult = await sendToSolutravo({
+      name: nom,
+      first_name: prenom,
+      tel: telephone,
+      email,
+      postal_code: codePostal,
+      town: ville,
+      project: description,
+      ip_address: ipAddress,
+    });
 
     return NextResponse.json(
       { 
         message: "Demande envoyée avec succès", 
         emailId: data?.id,
-        solutravo: null // Temporairement désactivé
+        solutravo: solutravoResult.success ? { quotation_id: solutravoResult.quotation_id } : null
       },
       { status: 200 }
     );
